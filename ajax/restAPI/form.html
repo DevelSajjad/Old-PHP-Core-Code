@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="input-data" action="">
+        <label for="">First Name</label>
+        <input type="text" id="fname" name="fname"><br>
+        <label for="">Last Name</label>
+        <input type="text" id="lname" name="lname"><br>
+        <label for="">Village</label>
+        <input type="text" id="vill" name="vill"> <br>
+        <input type="submit" id="btn" name="btn">
+    </form>
+    <div id="save"></div>
+    <script src="../js/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#btn").on("click",function(e){
+                e.preventDefault();
+                var formData = $("#input-data").serializeArray();
+                // console.log(formData);
+                var obj ={};
+                for(var a=0; a<formData.length; a++){
+                    obj[formData[a].name] = formData[a].value
+                }
+                var jsonstr = JSON.stringify(obj);
+                $.ajax({
+                    url: "http://localhost/myproject/ajax/restAPI/api-insert1.php",
+                    type: "POST",
+                    data: jsonstr,
+                    success:function(data){
+                        if(data.Status == true){
+                            $("#save").html(data.message);
+                        }else{
+                            $("#save").html(data.message);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
