@@ -10,7 +10,7 @@
     <form action="" method="POST" enctype="multipart/form-data">
         <input type="file" name="image"> </br> </br>
         <input type="submit">
-
+//sajjad
 
     </form>
     <?php
